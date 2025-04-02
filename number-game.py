@@ -3,12 +3,11 @@ import sys
 
 def start_game():
     print("""
-        Please select the difficulty level:
-        1. Easy (10 chances)
-        2. Medium (5 chances)
-        3. Hard (3 chances)
-        
-        """)
+    Please select the difficulty level:
+    1. Easy (10 chances)
+    2. Medium (5 chances)
+    3. Hard (3 chances)
+    """)
     choice = str(input("Enter your choice: ")).lower()
     
     if choice == "easy":
@@ -37,14 +36,16 @@ def run_game(difficulty, chances):
     number = random.randint(1, 100)
     turns = chances
     
-    while turns < 1:
+    while turns > 0:
         guess = int(input("Enter your guess: "))
         
         if guess > number:
+            turns -= 1
             print("Too high! Try a lower number.")
             print(f"Remaining attempts: {turns}")
         
         elif guess < number:
+            turns -= 1
             print("Too low! Try a higher number.")
             print(f"Remaining attempts: {turns}")
             
@@ -52,6 +53,9 @@ def run_game(difficulty, chances):
             print(f"Congratulations! You guessed the correct number in {chances - turns} attempt(s)!")
             print(f"The number was indeed {number}")
             break
+            
+        if turns == 0:
+            print(f"Sorry, you are out of attempts. The correct number was {number}.")
             
 if __name__ == "__main__":
     print("Welcome to the Number Guessing Game!")
@@ -63,7 +67,7 @@ if __name__ == "__main__":
         difficulty, chances = start_game()
         run_game(difficulty, chances)
         
-        again = str(input("Play again? (y/n): "))
+        again = str(input("Play again? (y/n): ")).lower()
         if again == "n":
             play_again = False
             print("Thanks for playing!")
