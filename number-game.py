@@ -43,11 +43,13 @@ def run_game(difficulty, chances):
             turns -= 1
             print("Too high! Try a lower number.")
             print(f"Remaining attempts: {turns}")
+            print()
         
         elif guess < number:
             turns -= 1
             print("Too low! Try a higher number.")
             print(f"Remaining attempts: {turns}")
+            print()
             
         else:
             print(f"Congratulations! You guessed the correct number in {chances - turns} attempt(s)!")
@@ -68,6 +70,7 @@ if __name__ == "__main__":
         run_game(difficulty, chances)
         
         again = str(input("Play again? (y/n): ")).lower()
+        print()
         if again == "n":
             play_again = False
             print("Thanks for playing!")
